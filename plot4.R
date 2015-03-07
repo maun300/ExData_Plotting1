@@ -3,12 +3,14 @@
 # Step 1 install the package dplyr if it not already installed
 # > install.packages("dplyr")
 #
-# Step 2 load the data if it's not already loaded
+# Step 2 load the source file
+#> source("plot4.R")
+#
+# Step 3 load the data if it's not already loaded
 # > data <- getData()
 #
-# Step 3 create the plot
+# Step 4 create the plot
 # > makePlot4(data)
-
 
 # load dplyr
 library(dplyr)
@@ -30,8 +32,10 @@ downloadData <- function() {
     unzip("./data/dataset.zip", exdir="./data")
 }
 
+# Loads the file into a data frame. The data is downloaded if it's not present
+# Only data from first and second february 2007 is selected.
+# A new column datetime is added to the data frame
 getData <- function() {
-    # Check if data directory exists. Create it if it's not.
     filename <- "./data/household_power_consumption.txt"
     if (!file.exists(filename)) {
         download(data)
@@ -42,6 +46,7 @@ getData <- function() {
     mutate(data, datetime = as.POSIXct(strptime(paste(data$Date, data$Time), "%d/%m/%Y %H:%M:%S")))
 }
 
+# writes the plot to a png file
 makePlot4 <- function(data) {
     Sys.setlocale("LC_TIME", "C")
     
