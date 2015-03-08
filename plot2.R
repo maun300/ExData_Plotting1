@@ -40,7 +40,7 @@ downloadData <- function() {
 getData <- function() {
     filename <- "./data/household_power_consumption.txt"
     if (!file.exists(filename)) {
-        download(data)
+        downloadData()
     }
     
     data<- read.table(filename, header=TRUE, na.strings="?", sep=";", stringsAsFactors=FALSE)
